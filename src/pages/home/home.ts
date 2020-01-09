@@ -10,7 +10,7 @@ import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public menu:MenuController) {}
-
+  
   ionViewWillEnter() {//quando a pagina entrar desabilita o menu
       this.menu.swipeEnable(false);
     }
