@@ -1,12 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
+
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
 
 import { MyApp } from './app.component';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CategoriaService } from '../services/domain/categoria.service';
 /**
  * Definicao de classe sem corpo. 
  */
@@ -18,6 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
   imports: [//modulos importados (A aplicacao Angular eh conjunto de modulos, e os modulos tem uma estrutura hierarquica)
     BrowserModule,//basico de uma setrutura de uma aplicacao Angular
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
 
@@ -31,7 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [//Classe que tem objetos injetados e será uma instancia unica para esse modulo
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CategoriaService
   ]
 })
 //Essa classe pode ser importado pra outros arquivos
