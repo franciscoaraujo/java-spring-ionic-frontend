@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 
-@Component({
+@IonicPage()
+@Component({//isso faz com que a classe seja um controlador da view
   selector: 'page-home',
   templateUrl: 'home.html'
 })
