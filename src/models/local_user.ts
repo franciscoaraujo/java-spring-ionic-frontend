@@ -1,5 +1,6 @@
 
 export interface LocalUser{
 
-    token : String
+    token : String;
+    email: String;
 }

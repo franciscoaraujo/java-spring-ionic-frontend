@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LocalUser } from "../models/local_user";
 import { STORAGE_KEYS } from "../config/storage_keys.config";
-import { JsonPipe } from "@angular/common";
 
 @Injectable()
 export class StorageService{
