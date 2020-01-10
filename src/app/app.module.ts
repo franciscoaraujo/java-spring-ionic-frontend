@@ -41,7 +41,6 @@ import { ErrorInterceptorProvider } from '../interceptors/erro-interceptor';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,
     ErrorInterceptorProvider
-    
   ]
 })
 //Essa classe pode ser importado pra outros arquivos
