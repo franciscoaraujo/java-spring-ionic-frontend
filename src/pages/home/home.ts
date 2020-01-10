@@ -32,7 +32,6 @@ export class HomePage {
     }
 
   login(){
-    //this.navCtrl.push("CategoriasPage");//fazndo implhamento/
     this.auth.authenticate(this.creds).subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot("CategoriasPage");//em empilhamento    
