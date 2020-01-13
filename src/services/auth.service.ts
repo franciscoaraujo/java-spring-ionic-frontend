@@ -23,8 +23,18 @@ export class  AuthService  {
         { 
             observe : 'response', 
             responseType : 'text'
-        })
+        });
     }
+
+    refreshToken(){//metodo que executa o post concatenando o endereco e passando objetos como argumentos 
+        return this.http
+         .post(`${API_CONFIG.baseUrl}/auth/refresh_token`, 
+         {},
+         { 
+             observe : 'response', 
+             responseType : 'text'
+         })
+     }
 
     successfulLogin(authorizationValue : String){
         let tok = authorizationValue.substr(7);

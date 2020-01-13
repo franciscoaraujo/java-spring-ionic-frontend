@@ -25,19 +25,26 @@ export class HomePage {
   
   ionViewWillEnter() {//quando a pagina entrar desabilita o menu
       this.menu.swipeEnable(false);
-    }
+  }
   
   ionViewDidLeave() {//quando a pagina sair habilita o menu
       this.menu.swipeEnable(true);
-    }
+  }
+  ionViewDidEnter(){
+    this.auth.refreshToken()
+    .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot("CategoriasPage");//em empilhamento    
+  },
+   error =>{});
+  }
 
   login(){
     this.auth.authenticate(this.creds).subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot("CategoriasPage");//em empilhamento    
     },
-     error =>{}
-    );
+     error =>{});
     
   }
 
