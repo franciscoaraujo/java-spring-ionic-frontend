@@ -30,6 +30,7 @@ export class HomePage {
   ionViewDidLeave() {//quando a pagina sair habilita o menu
       this.menu.swipeEnable(true);
   }
+  
   ionViewDidEnter(){
     this.auth.refreshToken()
     .subscribe(response => {
