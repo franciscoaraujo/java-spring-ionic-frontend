@@ -15,6 +15,7 @@ import { ErrorInterceptorProvider } from '../interceptors/erro-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/sotrage_service';
 import { ClienteService } from '../services/domain/cliente.service';
+import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
 /**
  * Definicao de classe sem corpo. 
@@ -43,6 +44,7 @@ import { ClienteService } from '../services/domain/cliente.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
     StorageService,

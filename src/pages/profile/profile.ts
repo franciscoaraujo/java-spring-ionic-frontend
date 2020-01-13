@@ -21,7 +21,7 @@ export class ProfilePage {
     public storage: StorageService, 
     public clienteService: ClienteService) {
   }
-
+  
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.email){
