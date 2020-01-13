@@ -30,7 +30,7 @@ export class HomePage {
   ionViewDidLeave() {//quando a pagina sair habilita o menu
       this.menu.swipeEnable(true);
   }
-  
+
   ionViewDidEnter(){
     this.auth.refreshToken()
     .subscribe(response => {
@@ -47,6 +47,11 @@ export class HomePage {
     },
      error =>{});
     
+  }
+
+  signup(){
+   this.navCtrl.push("SignupPage");
+   console.log('nnnnnnnnnnnnnnnnnnnnnnnnnn');
   }
 
 }
