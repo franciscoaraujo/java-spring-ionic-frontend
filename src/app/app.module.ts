@@ -16,6 +16,7 @@ import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/sotrage_service';
 import { ClienteService } from '../services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { ProdutoService } from '../services/domain/produto.service';
 
 /**
  * Definicao de classe sem corpo. 
@@ -48,7 +49,8 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
-    ClienteService
+    ClienteService,
+    ProdutoService
   ]
 })
 //Essa classe pode ser importado pra outros arquivos
