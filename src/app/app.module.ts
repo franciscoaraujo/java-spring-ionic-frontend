@@ -17,6 +17,7 @@ import { StorageService } from '../services/sotrage_service';
 import { ClienteService } from '../services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ProdutoService } from '../services/domain/produto.service';
+import { CartService } from '../services/domain/cart.service';
 
 /**
  * Definicao de classe sem corpo. 
@@ -50,7 +51,8 @@ import { ProdutoService } from '../services/domain/produto.service';
     AuthService,
     StorageService,
     ClienteService,
-    ProdutoService
+    ProdutoService,
+    CartService
   ]
 })
 //Essa classe pode ser importado pra outros arquivos
