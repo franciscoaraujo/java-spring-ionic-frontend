@@ -3,6 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from '../services/sotrage_service';
 import { AlertController } from 'ionic-angular';
+import { FieldMessage } from '../models/fieldmessage';
 
 
 @Injectable()
@@ -28,12 +29,15 @@ export class ErrorInterceptor implements HttpInterceptor {
                     switch(errorObj.status){
                         
                         case 401:
-
                             this.handler401();
                             break;
 
                         case 403:
                             this.handler403();
+                            break;
+
+                        case 422:
+                            this.handler422(errorObj);
                             break;
 
                         default:
@@ -44,6 +48,19 @@ export class ErrorInterceptor implements HttpInterceptor {
             }) as any;
     }
     
+    handler422(errorObj){
+        let alert = this.alertController.create({
+            title: "Erro 422: Validação",
+            message: this.listErros(errorObj.errors),
+            enableBackdropDismiss: false,
+            buttons: [
+                 {text: "OK"}
+            ]
+        });
+        alert.present();
+    }
+
+    
     handlerDefaultError(errorObj){
         let alert = this.alertController.create({
             title : "Erro " + errorObj.status + ": "+errorObj.error,
@@ -53,7 +70,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                  {text: "OK"}
             ]
         }); 
-
         alert.present();
     }
 
@@ -70,8 +86,15 @@ export class ErrorInterceptor implements HttpInterceptor {
                  {text: "OK"}
             ]
         }); 
-
         alert.present();
+    }
+
+    private listErros(messages: FieldMessage[]):string { 
+        let s: string = '';
+        for(var i=0; i<messages.length; i++){
+            s = s + '<p><strong>' + messages[i].fieldName + "</strong>: " + messages[i].message + '</p>';
+            return s;
+        }
     }
 
 
