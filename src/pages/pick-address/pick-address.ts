@@ -28,6 +28,7 @@ export class PickAddressPage {
   
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
+    
     if(localUser && localUser.email){
       this.clienteService.findByEmail(localUser.email)
       .subscribe(response=> {
@@ -53,6 +54,6 @@ export class PickAddressPage {
 
   nextPage(item: EnderecoDTO){
     this.pedido.enderecoDeEntrega = {id: item.id};
-    this.navCtrl.push('PaymentPage',{pedido: this.pedido})//Navegacao para outra pagina passando objeto como parametro
+    this.navCtrl.push('PaymentPage',{pedido: this.pedido})//Navegacao para outra pagina passando objeto como 
   }
 }
