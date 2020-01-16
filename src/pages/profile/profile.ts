@@ -25,11 +25,9 @@ export class ProfilePage {
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.email){
-      
       this.clienteService.findByEmail(localUser.email)
-
       .subscribe(response=> {
-        this.cliente = response;
+        this.cliente = response as ClienteDTO;//cast, por causa do busca por email
         this.getImageIfExists(); 
       },
         error =>{if(error.status == 403)
