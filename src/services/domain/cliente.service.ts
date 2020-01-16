@@ -27,4 +27,9 @@ export class ClienteService{
         return this.http.post(url,obj,{observe: "response", responseType: "text"});
     }
 
+        
+    findById(id: string) {
+        return this.http.get(`${API_CONFIG.baseUrl}/clientes/${id}`);
+    }
+
 }
