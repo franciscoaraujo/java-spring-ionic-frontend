@@ -67,8 +67,7 @@ export class ProdutosPage {
     loading.present();
     return loading;
   }
-
-
+  
   doRefresh(refresher) {
     this.page = 0;
     this.items = [];
