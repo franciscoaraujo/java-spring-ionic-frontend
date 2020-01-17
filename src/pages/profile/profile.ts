@@ -4,7 +4,7 @@ import { StorageService } from '../../services/sotrage_service';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { API_CONFIG } from '../../config/api.config';
-import { CameraOptions,CameraOriginal } from '@ionic-native/camera';
+import { CameraOptions, CameraOriginal } from '@ionic-native/camera';
 
 
 @IonicPage()
@@ -19,39 +19,43 @@ export class ProfilePage {
   cameraOn: boolean = false;
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public storage: StorageService, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public storage: StorageService,
     public clienteService: ClienteService,
     public camera: CameraOriginal) {
   }
-  
+
   ionViewDidLoad() {
+   this.loadData();
+  }
+
+  loadData(){
     let localUser = this.storage.getLocalUser();
-    if(localUser && localUser.email){
+    if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email)
-      .subscribe(response=> {
-        this.cliente = response as ClienteDTO;//cast, por causa do busca por email
-        this.getImageIfExists(); 
-      },
-        error =>{if(error.status == 403)
-          this.navCtrl.setRoot("HomePage");
-        });
+        .subscribe(response => {
+          this.cliente = response as ClienteDTO;//cast, por causa do busca por email
+          this.getImageIfExists();
+        },
+          error => {
+            if (error.status == 403)
+              this.navCtrl.setRoot("HomePage");
+          });
     }
-    else{
+    else {
       this.navCtrl.setRoot("HomePage");
     }
   }
-
-  getImageIfExists(){
+  getImageIfExists() {
     this.clienteService.getImgeFromBucket(this.cliente.id).subscribe(response => {
-      this.cliente.imageUrl =`${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
-    }, error=>{} );
+      this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
+    }, error => { });
   }
 
-  getCameraPicture(){
-    
-    this.cameraOn=true;
+  getCameraPicture() {
+
+    this.cameraOn = true;
 
     const options: CameraOptions = {
       quality: 100,
@@ -59,16 +63,31 @@ export class ProfilePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    
+
     this.camera.getPicture(options)
-    .then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     let picture = 'data:image/png;base64,' + imageData;
-      this.cameraOn=false;
-    }, (err) => {
-       // Handle error
-    });
+      .then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        let picture = 'data:image/png;base64,' + imageData;
+        this.cameraOn = false;
+      }, (err) => {
+        // Handle error
+      });
 
   }
+  sendPiture(){
+    this.clienteService.uploadPicture(this.picture)
+    .subscribe(response=>{
+      this.picture = null;
+      this.loadData();
+    }, error=>{});
+  }
+
+  cancel(){
+    this.picture = null;
+  }
+
+
+
+
 }
