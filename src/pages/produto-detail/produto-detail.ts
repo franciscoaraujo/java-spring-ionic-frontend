@@ -54,4 +54,7 @@ export class ProdutoDetailPage {
     loading.present();
     return loading;
   }
+
+
+  
 }
